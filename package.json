@@ -45,12 +45,8 @@
     "natives": "^1.1.6"
   },
   "dependencies": {
-    "angular": "^1.8.2",
-    "angular-animate": "^1.8.2",
-    "angular-mocks": "^1.8.2",
-    "angular-route": "^1.8.2",
-    "angular-sanitize": "^1.8.2",
-    "debug": "^4.3.3",
-    "masonry-layout": "^4.2.2"
+    "debug": "^4.1.1",
+    "masonry-layout": "^4.2.2",
+    "moment": "^2.26.0"
   }
 }
