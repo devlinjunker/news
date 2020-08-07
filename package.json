@@ -1,7 +1,7 @@
 {
   "name": "nextcloud-news",
   "description": "An RSS/Atom feed reader",
-  "main": "build/app.min.js",
+  "main": "js/app.min.js",
   "scripts": {
     "test": "node node_modules/gulp-cli/bin/gulp.js karma",
     "prebuild": "npm ci",
@@ -33,31 +33,24 @@
   "private": true,
   "homepage": "https://github.com/nextcloud/news",
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-cli": "^2.3.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-jshint": "^2.1.0",
-    "gulp-ng-annotate": "^2.1.0",
-    "gulp-sourcemaps": "^3.0.0",
-    "gulp-terser": "^2.1.0",
-    "jasmine-core": "^4.1.0",
+    "jasmine-core": "^3.10.1",
     "jquery": "^3.6.0",
-    "jshint": "^2.13.4",
-    "karma": "^6.3.19",
-    "karma-chrome-launcher": "^3.1.1",
-    "karma-coverage": "^2.2.0",
+    "jshint": "^2.13.1",
+    "karma": "^6.3.9",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-coverage": "^2.1.0",
     "karma-firefox-launcher": "^2.1.2",
-    "karma-jasmine": "^5.0.0",
-    "minimatch": "^5.0.1",
+    "karma-jasmine": "^4.0.1",
+    "minimatch": "^3.0.4",
     "natives": "^1.1.6"
   },
   "dependencies": {
-    "angular": "^1.8.3",
-    "angular-animate": "^1.8.3",
-    "angular-mocks": "^1.8.3",
-    "angular-route": "^1.8.3",
-    "angular-sanitize": "^1.8.3",
-    "debug": "^4.3.4",
+    "angular": "^1.8.2",
+    "angular-animate": "^1.8.2",
+    "angular-mocks": "^1.8.2",
+    "angular-route": "^1.8.2",
+    "angular-sanitize": "^1.8.2",
+    "debug": "^4.3.3",
     "masonry-layout": "^4.2.2"
   }
 }
