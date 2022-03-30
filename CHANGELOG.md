@@ -7,6 +7,7 @@ The format is mostly based on [Keep a Changelog](https://keepachangelog.com/en/1
 ### Changed
 
 ### Fixed
+- Fix updated api not returning any item after marking item as read (#1713)
 
 # Releases
 ## [18.0.1-beta2] - 2022-03-22
