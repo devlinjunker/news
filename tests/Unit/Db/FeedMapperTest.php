@@ -49,6 +49,7 @@ class FeedMapperTest extends MapperTestUtility
         $feed2->resetUpdatedFields();
 
         $this->feeds = [$feed1, $feed2];
+
     }
 
     /**
@@ -533,11 +534,11 @@ class FeedMapperTest extends MapperTestUtility
             ->withConsecutive(['id IN (:idList)'], ['unread != :unread'])
             ->will($this->returnSelf());
 
-        $this->builder->expects($this->exactly(2))
+        $this->builder->expects($this->exactly(3))
             ->method('setParameter')
-            ->withConsecutive(['unread', false], ['idList', [1, 2]])
+            ->withConsecutive(['unread', false], ['idList', [1, 2]], ['last_modified'])
             ->will($this->returnSelf());
-
+        
         $this->builder->expects($this->exactly(1))
             ->method('getSQL')
             ->will($this->returnValue('QUERY'));
@@ -635,9 +636,9 @@ class FeedMapperTest extends MapperTestUtility
             ->withConsecutive(['id IN (:idList)'], ['unread != :unread'])
             ->will($this->returnSelf());
 
-        $this->builder->expects($this->exactly(2))
+        $this->builder->expects($this->exactly(3))
             ->method('setParameter')
-            ->withConsecutive(['unread', false], ['idList', [1, 2]])
+            ->withConsecutive(['unread', false], ['idList', [1, 2]], ['last_modified'])
             ->will($this->returnSelf());
 
         $this->builder->expects($this->exactly(1))

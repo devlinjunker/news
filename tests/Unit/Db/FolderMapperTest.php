@@ -361,9 +361,9 @@ class FolderMapperTest extends MapperTestUtility
             ->withConsecutive(['id IN (:idList)'], ['unread != :unread'])
             ->will($this->returnSelf());
 
-        $this->builder->expects($this->exactly(2))
+        $this->builder->expects($this->exactly(3))
             ->method('setParameter')
-            ->withConsecutive(['unread', false], ['idList', [1, 2]])
+            ->withConsecutive(['unread', false], ['idList', [1, 2]], ['last_modified'])
             ->will($this->returnSelf());
 
         $this->builder->expects($this->exactly(1))
@@ -464,9 +464,9 @@ class FolderMapperTest extends MapperTestUtility
             ->withConsecutive(['id IN (:idList)'], ['unread != :unread'])
             ->will($this->returnSelf());
 
-        $this->builder->expects($this->exactly(2))
+        $this->builder->expects($this->exactly(3))
             ->method('setParameter')
-            ->withConsecutive(['unread', false], ['idList', [1, 2]])
+            ->withConsecutive(['unread', false], ['idList', [1, 2]], ['last_modified'])
             ->will($this->returnSelf());
 
         $this->builder->expects($this->exactly(1))
