@@ -342,7 +342,7 @@ class FolderMapperTest extends MapperTestUtility
             ->with('SQL QUERY')
             ->willReturn($result);
 
-        $this->builder->expects($this->once())
+        $this->builder->expects($this->exactly(2))
             ->method('createParameter')
             ->will($this->returnArgument(0));
 
@@ -351,9 +351,9 @@ class FolderMapperTest extends MapperTestUtility
             ->with('news_items')
             ->will($this->returnSelf());
 
-        $this->builder->expects($this->once())
+        $this->builder->expects($this->exactly(2))
             ->method('set')
-            ->with('unread', 'unread')
+            ->withConsecutive(['unread', 'unread'], ['last_modified', 'last_modified'])
             ->will($this->returnSelf());
 
         $this->builder->expects($this->exactly(2))
@@ -445,7 +445,7 @@ class FolderMapperTest extends MapperTestUtility
             ->with('SQL QUERY')
             ->willReturn($result);
 
-        $this->builder->expects($this->once())
+        $this->builder->expects($this->exactly(2))
             ->method('createParameter')
             ->will($this->returnArgument(0));
 
@@ -454,9 +454,9 @@ class FolderMapperTest extends MapperTestUtility
             ->with('news_items')
             ->will($this->returnSelf());
 
-        $this->builder->expects($this->once())
+        $this->builder->expects($this->exactly(2))
             ->method('set')
-            ->with('unread', 'unread')
+            ->withConsecutive(['unread', 'unread'], ['last_modified', 'last_modified'])
             ->will($this->returnSelf());
 
         $this->builder->expects($this->exactly(2))
