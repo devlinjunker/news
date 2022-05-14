@@ -5,14 +5,45 @@
 			button-id="new-feed-button"
 			button-class="icon-add" />
 		<ul id="locations" class="with-icon">
+
+            <AppNavigationNewItem :title="t('news','New folder')"
+                                  icon="icon-add-folder"
+                                  @new-item="newFolder">
+            </AppNavigationNewItem>
+
 			<AppNavigationItem :title="t('news','Unread articles')" icon="icon-rss">
-				<AppNavigationCounter slot="counter" :highlighted="true">
-					5
-				</AppNavigationCounter>
+                <template #actions>
+                    <ActionButton icon="icon-checkmark" @click="alert('Edit')">
+                        t('news','Mark read')
+                    </ActionButton>
+                </template>
+                <template #counter>
+                    <CounterBubble>5</CounterBubble>
+                </template>
 			</AppNavigationItem>
-			<AppNavigationNewItem :title="t('news','New folder')"
-				icon="icon-add"
-				@new-item="newFolder" />
+			<AppNavigationItem :title="t('news','All articles')" icon="icon-rss">
+                <template #actions>
+                    <ActionButton icon="icon-checkmark" @click="alert('Edit')">
+                        t('news','Mark read')
+                    </ActionButton>
+                </template>
+                <template #counter>
+                    <CounterBubble>12</CounterBubble>
+                </template>
+			</AppNavigationItem>
+			<AppNavigationItem :title="t('news','Starred')" icon="icon-starred">
+                <template #counter>
+                    <CounterBubble>35</CounterBubble>
+                </template>
+			</AppNavigationItem>
+
+            <!-- Ordner... -->
+
+            <AppNavigationItem :title="t('news','Explore')" icon="icon-link" @click="alert('Edit')">
+                <template #counter>
+                    <CounterBubble>35</CounterBubble>
+                </template>
+            </AppNavigationItem>
 		</ul>
 	</AppNavigation>
 </template>
@@ -23,6 +54,8 @@ import AppNavigationNew from '@nextcloud/vue/dist/Components/AppNavigationNew'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 import AppNavigationNewItem from '@nextcloud/vue/dist/Components/AppNavigationNewItem'
 import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
+import CounterBubble from '@nextcloud/vue/dist/Components/CounterBubble'
+import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 
 export default {
 	components: {
@@ -31,6 +64,8 @@ export default {
 		AppNavigationItem,
 		AppNavigationNewItem,
 		AppNavigationCounter,
+        CounterBubble,
+        ActionButton
 	},
 	methods: {
 		newFolder(value) {
