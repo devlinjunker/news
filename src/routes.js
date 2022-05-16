@@ -1,12 +1,15 @@
-import ExplorePanel from './views/Explore'
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-const ROUTES = {
-  EXPLORE: 'explore'
+import ExplorePanel from './views/Explore'
+import StarredPanel from './views/Starred'
+
+export const ROUTES = {
+  EXPLORE: 'explore',
+  STARRED: 'starred'
 }
 
-getInitialRoute = function() {
+var getInitialRoute = function() {
   return ROUTES.EXPLORE
 }
 
@@ -22,6 +25,12 @@ const routes = [
 		name: ROUTES.EXPLORE,
 		path: "/explore",
 		component: ExplorePanel,
+		props: true
+	},
+  {
+		name: ROUTES.STARRED,
+		path: "/starred",
+		component: StarredPanel,
 		props: true
 	},
 ];

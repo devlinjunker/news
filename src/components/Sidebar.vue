@@ -31,7 +31,7 @@
                     <CounterBubble>12</CounterBubble>
                 </template>
 			</AppNavigationItem>
-			<AppNavigationItem :title="t('news','Starred')" icon="icon-starred" @click="alert('Starred')">
+			<AppNavigationItem :title="t('news','Starred')" :to="{ name: ROUTES.STARRED }" icon="icon-starred" >
                 <template #counter>
                     <CounterBubble>35</CounterBubble>
                 </template>
@@ -39,7 +39,7 @@
 
             <!-- Ordner... -->
 
-            <AppNavigationItem :title="t('news','Explore')" icon="icon-link" @click="alert('Explore')">
+            <AppNavigationItem :title="t('news','Explore')" :to="{ name: ROUTES.EXPLORE }"  icon="icon-link">
                 <template #counter>
                     <CounterBubble>35</CounterBubble>
                 </template>
@@ -57,6 +57,9 @@ import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCo
 import CounterBubble from '@nextcloud/vue/dist/Components/CounterBubble'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 
+import { ROUTES } from '../routes.js'
+
+
 export default {
 	components: {
 		AppNavigation,
@@ -67,6 +70,11 @@ export default {
         CounterBubble,
         ActionButton
 	},
+    data() {
+        return {
+            ROUTES
+        }
+    },
 	methods: {
 		alert(value) {
 			window.alert(value)
