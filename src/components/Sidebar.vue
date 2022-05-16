@@ -8,12 +8,12 @@
 
             <AppNavigationNewItem :title="t('news','New folder')"
                                   icon="icon-add-folder"
-                                  @new-item="newFolder">
+                                  @new-item="alert">
             </AppNavigationNewItem>
 
-			<AppNavigationItem :title="t('news','Unread articles')" icon="icon-rss">
+			<AppNavigationItem :title="t('news','Unread articles')" icon="icon-rss" @click="alert('Unread')">
                 <template #actions>
-                    <ActionButton icon="icon-checkmark" @click="alert('Edit')">
+                    <ActionButton icon="icon-checkmark" @click="alert('Mark Read')">
                         t('news','Mark read')
                     </ActionButton>
                 </template>
@@ -21,9 +21,9 @@
                     <CounterBubble>5</CounterBubble>
                 </template>
 			</AppNavigationItem>
-			<AppNavigationItem :title="t('news','All articles')" icon="icon-rss">
+			<AppNavigationItem :title="t('news','All articles')" icon="icon-rss" @click="alert('All')">
                 <template #actions>
-                    <ActionButton icon="icon-checkmark" @click="alert('Edit')">
+                    <ActionButton icon="icon-checkmark" @click="alert('Mark Read')">
                         t('news','Mark read')
                     </ActionButton>
                 </template>
@@ -31,7 +31,7 @@
                     <CounterBubble>12</CounterBubble>
                 </template>
 			</AppNavigationItem>
-			<AppNavigationItem :title="t('news','Starred')" icon="icon-starred">
+			<AppNavigationItem :title="t('news','Starred')" icon="icon-starred" @click="alert('Starred')">
                 <template #counter>
                     <CounterBubble>35</CounterBubble>
                 </template>
@@ -39,7 +39,7 @@
 
             <!-- Ordner... -->
 
-            <AppNavigationItem :title="t('news','Explore')" icon="icon-link" @click="alert('Edit')">
+            <AppNavigationItem :title="t('news','Explore')" icon="icon-link" @click="alert('Explore')">
                 <template #counter>
                     <CounterBubble>35</CounterBubble>
                 </template>
@@ -68,8 +68,8 @@ export default {
         ActionButton
 	},
 	methods: {
-		newFolder(value) {
-			alert(value)
+		alert(value) {
+			window.alert(value)
 		},
 	},
 }
