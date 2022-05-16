@@ -30,8 +30,11 @@
                         t('news','Mark read')
                     </ActionButton>
                 </template>
-            </AppNavigationItem>
-            <AppNavigationItem :title="t('news','Starred')" icon="icon-starred">
+                <template #counter>
+                    <CounterBubble>12</CounterBubble>
+                </template>
+			</AppNavigationItem>
+			<AppNavigationItem :title="t('news','Starred')" :to="{ name: ROUTES.STARRED }" icon="icon-starred" >
                 <template #counter>
                     <CounterBubble>35</CounterBubble>
                 </template>
@@ -101,9 +104,7 @@
                 </template>
             </AppNavigationItem>
 
-            <AppNavigationItem :title="t('news','Explore')"
-                               icon="icon-link"
-                               :to="{ name: 'explore' }">
+            <AppNavigationItem :title="t('news','Explore')" :to="{ name: ROUTES.EXPLORE }"  icon="icon-link">
                 <template #counter>
                     <CounterBubble>35</CounterBubble>
                 </template>
@@ -121,6 +122,9 @@ import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCo
 import CounterBubble from '@nextcloud/vue/dist/Components/CounterBubble'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import AddFeed from "./AddFeed";
+
+import { ROUTES } from '../routes.js'
+
 
 export default {
     components: {
@@ -159,6 +163,11 @@ export default {
         }
     },
     created() {
-    }
+    },
+    data() {
+        return {
+            ROUTES
+        }
+    },
 }
 </script>

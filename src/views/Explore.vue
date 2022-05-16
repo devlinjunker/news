@@ -3,9 +3,10 @@
     <div class="grid-container">
         <div
             v-for="entry in explorableSites"
+            :key="entry.title"
             class="explore-feed grid-item"
         >
-            <h2s
+            <h2
                 v-if="entry.favicon"
                 class="explore-title"
                 :style="{
@@ -18,7 +19,7 @@
                     :href="entry.url"
                     >{{ entry.title }}</a
                 >
-            </h2s>
+            </h2>
             <h2
                 v-if="!entry.favicon"
                 class="icon-rss explore-title"
@@ -53,7 +54,6 @@ export default {
         explorableSites: {
             type: Array,
             default: () => [],
-            required: true,
         },
     },
     created() {
