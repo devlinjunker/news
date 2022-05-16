@@ -11,12 +11,12 @@
 
             <AppNavigationNewItem :title="t('news','New folder')"
                                   icon="icon-add-folder"
-                                  @new-item="newFolder">
+                                  @new-item="alert">
             </AppNavigationNewItem>
 
             <AppNavigationItem :title="t('news','Unread articles')" icon="icon-rss">
                 <template #actions>
-                    <ActionButton icon="icon-checkmark" @click="alert('Edit')">
+                    <ActionButton icon="icon-checkmark" @click="alert('Mark Read')">
                         t('news','Mark read')
                     </ActionButton>
                 </template>
@@ -26,7 +26,7 @@
             </AppNavigationItem>
             <AppNavigationItem :title="t('news','All articles')" icon="icon-rss">
                 <template #actions>
-                    <ActionButton icon="icon-checkmark" @click="alert('Edit')">
+                    <ActionButton icon="icon-checkmark" @click="alert('Mark Read')">
                         t('news','Mark read')
                     </ActionButton>
                 </template>

@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
-import Explore from './components/Explore'
 import {generateUrl} from "@nextcloud/router";
 import Vuex from 'vuex'
 import axios from "@nextcloud/axios";
+import router from './routes.js'
 
 Vue.prototype.t = t
 Vue.prototype.n = n
@@ -21,19 +21,19 @@ Vue.directive('tooltip', Tooltip)
 const feedUrl = generateUrl("/apps/news/feeds")
 const folderUrl = generateUrl("/apps/news/folders")
 
-const routes = [
-    {
-        name: 'explore',
-        path: '#explore',
-        component: Explore
-    },
-]
+// const routes = [
+//     {
+//         name: 'explore',
+//         path: '#explore',
+//         component: Explore
+//     },
+// ]
 
-const router = new VueRouter({
-    mode: 'history',
-    base: generateUrl('apps/news'),
-    routes
-});
+// const router = new VueRouter({
+//     mode: 'history',
+//     base: generateUrl('apps/news'),
+//     routes
+// });
 
 const store = new Vuex.Store({
     state: {
