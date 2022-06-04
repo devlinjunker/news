@@ -206,6 +206,9 @@ export default {
 		closeShowAddFeed() {
 			this.showAddFeed = false
 		},
+		alert(msg) {
+			window.alert(msg)
+		},
 	},
 }
 </script>
