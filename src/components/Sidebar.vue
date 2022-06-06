@@ -13,9 +13,7 @@
 				icon="icon-add-folder"
 				@new-item="newFolder" />
 
-			<AppNavigationItem
-				:title="t('news', 'Unread articles')"
-				icon="icon-rss">
+			<AppNavigationItem :title="t('news', 'Unread articles')" icon="icon-rss">
 				<template #actions>
 					<ActionButton icon="icon-checkmark" @click="alert('Edit')">
 						t('news','Mark read')
@@ -25,18 +23,14 @@
 					<CounterBubble>5</CounterBubble>
 				</template>
 			</AppNavigationItem>
-			<AppNavigationItem
-				:title="t('news', 'All articles')"
-				icon="icon-rss">
+			<AppNavigationItem :title="t('news', 'All articles')" icon="icon-rss">
 				<template #actions>
 					<ActionButton icon="icon-checkmark" @click="alert('Edit')">
 						t('news','Mark read')
 					</ActionButton>
 				</template>
 			</AppNavigationItem>
-			<AppNavigationItem
-				:title="t('news', 'Starred')"
-				icon="icon-starred">
+			<AppNavigationItem :title="t('news', 'Starred')" icon="icon-starred">
 				<template #counter>
 					<CounterBubble>35</CounterBubble>
 				</template>
@@ -61,14 +55,10 @@
 							<div v-if="!feed.faviconLink" class="icon-rss" />
 						</template>
 						<template #actions>
-							<ActionButton
-								icon="icon-checkmark"
-								@click="alert('Mark read')">
+							<ActionButton icon="icon-checkmark" @click="alert('Mark read')">
 								{{ t("news", "Mark read") }}
 							</ActionButton>
-							<ActionButton
-								icon="icon-pinned"
-								@click="alert('Rename')">
+							<ActionButton icon="icon-pinned" @click="alert('Rename')">
 								{{ t("news", "Unpin from top") }}
 							</ActionButton>
 							<ActionButton
@@ -106,9 +96,7 @@
 								@click="deleteFolder(folder)">
 								{{ t("news", "Ignore updated") }}
 							</ActionButton>
-							<ActionButton
-								icon="icon-icon-rss"
-								@click="deleteFolder(folder)">
+							<ActionButton icon="icon-icon-rss" @click="deleteFolder(folder)">
 								{{ t("news", "Open feed URL") }}
 							</ActionButton>
 							<ActionButton
@@ -116,9 +104,7 @@
 								@click="deleteFolder(folder)">
 								{{ t("news", "Rename") }}
 							</ActionButton>
-							<ActionButton
-								icon="icon-delete"
-								@click="deleteFolder(folder)">
+							<ActionButton icon="icon-delete" @click="deleteFolder(folder)">
 								{{ t("news", "Delete") }}
 							</ActionButton>
 						</template>
@@ -128,17 +114,13 @@
 					<CounterBubble>{{ folder.feedCount }}</CounterBubble>
 				</template>
 				<template #actions>
-					<ActionButton
-						icon="icon-checkmark"
-						@click="alert('Mark read')">
+					<ActionButton icon="icon-checkmark" @click="alert('Mark read')">
 						{{ t("news", "Mark read") }}
 					</ActionButton>
 					<ActionButton icon="icon-rename" @click="alert('Rename')">
 						{{ t("news", "Rename") }}
 					</ActionButton>
-					<ActionButton
-						icon="icon-delete"
-						@click="deleteFolder(folder)">
+					<ActionButton icon="icon-delete" @click="deleteFolder(folder)">
 						{{ t("news", "Delete") }}
 					</ActionButton>
 				</template>
@@ -205,6 +187,9 @@ export default {
 		},
 		closeShowAddFeed() {
 			this.showAddFeed = false
+		},
+		alert(msg) {
+			window.alert(msg)
 		},
 	},
 }

@@ -70,11 +70,11 @@ const store = new Vuex.Store({
 		},
 		deleteFolder({ commit }, { folder }) {
 			/**
-            this.getByFolderId(folderId).forEach(function (feed) {
-                promises.push(self.reversiblyDelete(feed.id, false, true));
-            });
+						this.getByFolderId(folderId).forEach(function (feed) {
+								promises.push(self.reversiblyDelete(feed.id, false, true));
+						});
 
-            this.updateUnreadCache();
+						this.updateUnreadCache();
 			 */
 			axios.delete(folderUrl + '/' + folder.id).then()
 		},
@@ -97,9 +97,9 @@ const store = new Vuex.Store({
 			}
 
 			/**
-            if (title !== undefined) {
-                title = title.trim();
-            }
+						if (title !== undefined) {
+								title = title.trim();
+						}
 			 */
 
 			const feed = {
