@@ -107,15 +107,27 @@
 	</Modal>
 </template>
 
-<script>
-/* eslint-disable vue/require-prop-type-constructor */
+<script lang="ts">
 
+import Vue from 'vue'
 import Modal from '@nextcloud/vue/dist/Components/Modal'
 import CheckboxRadioSwitch from '@nextcloud/vue/dist/Components/CheckboxRadioSwitch'
 import Button from '@nextcloud/vue/dist/Components/Button'
 import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
+import { Folder } from '../types/Folder.vue'
+import { Feed } from '../types/Feed.vue'
 
-export default {
+type AddFeedState = {
+	folder: Folder;
+	autoDiscover: boolean;
+	createNewFolder: boolean;
+	withBasicAuth: boolean;
+
+	// from props
+	feed?: Feed;
+};
+
+export default Vue.extend({
 	components: {
 		Modal,
 		CheckboxRadioSwitch,
@@ -128,10 +140,9 @@ export default {
 			default: '',
 		},
 	},
-	emits: ['close'],
-	data() {
+	data: (): AddFeedState => {
 		return {
-			folder: {},
+			folder: { name: '' },
 			autoDiscover: true,
 			createNewFolder: false,
 			withBasicAuth: false,
@@ -159,7 +170,8 @@ export default {
 			})
 		},
 	},
-}
+})
+
 </script>
 
 <style scoped>
