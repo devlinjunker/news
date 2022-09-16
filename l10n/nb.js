@@ -3,7 +3,6 @@ OC.L10N.register(
     {
     "Request failed, network connection unavailable!" : "Forespørsel mislyktes, nettverksforbindelse utilgjengelig!",
     "Request unauthorized. Are you logged in?" : "Forespørsel uautorisert. Er du logget inn?",
-    "Request forbidden. Are you an admin?" : "Forespørsel forbudt. Er du en administrator?",
     "Token expired or app not enabled! Reload the page!" : "Nøkkel utløpt eller app ikke aktivert! Last siden på nytt!",
     "Internal server error! Please check your data/nextcloud.log file for additional information!" : "Intern feil! Sjekk dine data/nextcloud.log fil for mer informasjon.",
     "Request failed, Nextcloud is in currently in maintenance mode!" : "Forespørsel mislyktes, Nextcloud er i vedlikeholdsmodus!",
@@ -17,7 +16,6 @@ OC.L10N.register(
     "Maximum redirects" : "Maksimalt antall videresendinger",
     "Feed fetcher timeout" : "Tidsavbrudd for henting av strøm",
     "Explore Service URL" : "URL for utforskertjeneste",
-    "Saved" : "Lagret",
     "Download" : "Last ned",
     "Close" : "Lukk",
     "No articles available" : "Ingen artikler tilgjengelig",

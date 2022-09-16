@@ -3,7 +3,6 @@ OC.L10N.register(
     {
     "Request failed, network connection unavailable!" : "Päring ei õnnestunud, võrguühendus puudub!",
     "Request unauthorized. Are you logged in?" : "Päring pole lubatud. Oled sa sisse loginud?",
-    "Request forbidden. Are you an admin?" : "Päring on keelatud. Kas sa oled admin?",
     "Request failed, Nextcloud is in currently in maintenance mode!" : "Päring ebaõnnestus, Nextcloud on hetkel hooldusrežiimis.",
     "Unread articles" : "Lugemata artiklid",
     "News" : "News",
@@ -13,7 +12,6 @@ OC.L10N.register(
     "Maximum redirects" : "Maksimaalsed ümbersuunamised",
     "Feed fetcher timeout" : "Voo ühenduse aegumine",
     "Explore Service URL" : "Sirvi teenuse URL-i",
-    "Saved" : "Salvestatud",
     "Download" : "Lae alla",
     "Close" : "Sulge",
     "No articles available" : "Ühtegi artiklit pole saadaval",

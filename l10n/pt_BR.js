@@ -3,7 +3,6 @@ OC.L10N.register(
     {
     "Request failed, network connection unavailable!" : "A solicitação falhou, conexão de rede indisponível!",
     "Request unauthorized. Are you logged in?" : "Solicitação não autorizada. Você está logado?",
-    "Request forbidden. Are you an admin?" : "Solicitação proibida. Você é um administrador?",
     "Token expired or app not enabled! Reload the page!" : "Token expirado ou aplicativo não habilitado! Recarregue a página!",
     "Internal server error! Please check your data/nextcloud.log file for additional information!" : "Erro interno do servidor! Verifique o arquivo data/nextcloud.log para obter informações adicionais.",
     "Request failed, Nextcloud is in currently in maintenance mode!" : "A solicitação falhou pois o Nextcloud está em modo de manutenção!",
@@ -19,18 +18,14 @@ OC.L10N.register(
     "Purge interval" : "Limpar intervalo",
     "Minimum amount of seconds after deleted feeds and folders are removed from the database; values below 60 seconds are ignored." : "Valor mínimo em segundos após pastas e feeds excluídos serem excluídos do banco de dados; valores abaixo de 60 segundos serão ignorados.",
     "Maximum read count per feed" : "O número máximo de leituras por feed",
-    "Defines the maximum amount of articles that can be read per feed which won't be deleted by the cleanup job; if old articles reappear after being read, increase this value; negative values such as -1 will turn this feature off." : "Define a quantidade máxima de artigos que podem ser lidos pelo feed e qual não será excluído pela tarefa de limpeza; se artigos antigos reaparecerem após lidos, aumente este valor; valores negativos tais como -1 irão desativar este recurso.",
     "Maximum redirects" : "Redirecionamentos máximos",
     "How many redirects the feed fetcher should follow." : "Quantos redirecionamentos o alimentador de feed deve seguir.",
     "Feed fetcher timeout" : "Tempo limite do alimentador de feed",
     "Maximum number of seconds to wait for an RSS or Atom feed to load; if it takes longer the update will be aborted." : "O número máximo de segundos para esperar por um feed RSS ou Atom carregar; se ele demorar muito a atualização será cancelada.",
     "Explore Service URL" : "Explorar Serviços URL",
     "If given, this service's URL will be queried for displaying the feeds in the explore feed section. To fall back to the built in explore service, leave this input empty." : "Se fornecido, a URL deste serviço será consultada para exibir os feeds na seção explorar feed. Para voltar ao serviço de exploração integrado, deixe esta entrada vazia.",
-    "For more information check the wiki." : "Para mais informações, consulte o wiki.",
     "Update interval" : "Intervalo de atualização",
     "Interval in seconds in which the feeds will be updated." : "Intervalo em segundos em que os feeds serão atualizados.",
-    "For more information check the documentation." : "Para mais informações consulte a documentação. ",
-    "Saved" : "Salvo",
     "Download" : "Baixar",
     "Close" : "Fechar",
     "Subscribe to" : "Inscrever-se em",
@@ -133,4 +128,4 @@ OC.L10N.register(
     "Documentation" : "Documentação",
     "Report a bug" : "Reportar um erro"
 },
-"nplurals=2; plural=(n > 1);");
+"nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

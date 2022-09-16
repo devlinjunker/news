@@ -3,7 +3,6 @@ OC.L10N.register(
     {
     "Request failed, network connection unavailable!" : "הבקשה נכשלה, חיבור רשת לא זמין!",
     "Request unauthorized. Are you logged in?" : "בקשה לא מורשת. האם הנך מחובר/ת?",
-    "Request forbidden. Are you an admin?" : "בקשה אסורה. האם הנך מנהל/ת?",
     "Token expired or app not enabled! Reload the page!" : "אישור פג תוקף או יישום לא מופעל! יש לטעון את הדף שוב!",
     "Internal server error! Please check your data/nextcloud.log file for additional information!" : "שגיאת שרת פנימית! נא לעיין בקובץ data/nextcloud.log שאצלך לקבלת פרטים נוספים!",
     "Request failed, Nextcloud is in currently in maintenance mode!" : "הבקשה נכשלה, מערכת Nextcloud נמצאת כרגע במצב תחזוקה!",
@@ -17,8 +16,6 @@ OC.L10N.register(
     "Maximum redirects" : "מספר ניתובים מירבי",
     "Feed fetcher timeout" : "עבר זמן מרבי להזנת ערוץ התוכן",
     "Explore Service URL" : "חקירת נתיב שירות",
-    "For more information check the wiki." : "למידע נוסף יש לבקר בוויקי.",
-    "Saved" : "נשמר",
     "Download" : "הורדה",
     "Close" : "סגירה",
     "No articles available" : "אין מאמרים זמינים",

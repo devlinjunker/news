@@ -3,7 +3,6 @@ OC.L10N.register(
     {
     "Request failed, network connection unavailable!" : "Pedido falhou, ligação à rede indisponível!",
     "Request unauthorized. Are you logged in?" : "Pedido não autorizado. Fez o login?",
-    "Request forbidden. Are you an admin?" : "Pedido proibido. É um administrador?",
     "Token expired or app not enabled! Reload the page!" : "Token expirou ou aplicação não ativa! Recarregue a página!",
     "Internal server error! Please check your data/nextcloud.log file for additional information!" : "Erro interno do servidor. Veja por favor o ficheiro na pasta data/nextcloud.log para mais informações!",
     "Request failed, Nextcloud is in currently in maintenance mode!" : "Falha no pedido, Nextcloud está atualmente em modo de manutenção!",
@@ -21,7 +20,6 @@ OC.L10N.register(
     "Feed fetcher timeout" : "A obtenção do feed expirou",
     "Explore Service URL" : "Explorar Serviço URL",
     "Update interval" : "Intervalo de actualização",
-    "Saved" : "Guardado",
     "Download" : "Transferir",
     "Close" : "Fechar",
     "No articles available" : "Não há artigos disponíveis",
@@ -107,4 +105,4 @@ OC.L10N.register(
     "Documentation" : "Documentação",
     "Report a bug" : "Reportar um erro"
 },
-"nplurals=2; plural=(n != 1);");
+"nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
