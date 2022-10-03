@@ -18,6 +18,8 @@
     "baseUrl": ".",
     "types": [
       "webpack-env",
+      "jest",
+      "node"
       // TODO: Add these back when we add unit testing
       // "mocha",
       // "chai"
@@ -43,6 +45,6 @@
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    
   ]
 }
