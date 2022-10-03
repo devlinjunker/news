@@ -149,7 +149,7 @@ export default Vue.extend({
 		}
 	},
 	computed: {
-		folders() {
+		folders(): Folder[] {
 			return this.$store.state.folders
 		},
 	},
