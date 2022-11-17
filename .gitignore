@@ -17,6 +17,9 @@ tests/api/helpers/settings-override.bash
 #bats
 tests/api/helpers/settings-override.bash
 
+#bats
+tests/api/helpers/settings-override.bash
+
 # python
 PKG-INFO
 *pyc
