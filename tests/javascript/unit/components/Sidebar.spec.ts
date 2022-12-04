@@ -1,5 +1,5 @@
 import { ACTIONS } from '../../../../src/store'
-import { Wrapper, shallowMount, createLocalVue } from '@vue/test-utils'
+import { Wrapper, shallowMount, createLocalVue, mount } from '@vue/test-utils'
 
 import AppSidebar from '../../../../src/components/Sidebar.vue'
 
@@ -128,7 +128,82 @@ describe('Sidebar.vue', () => {
 		})
 	})
 
-	// TODO: More Template Testing with https://test-utils.vuejs.org/guide/essentials/a-crash-course.html#adding-a-new-todo
+	describe('SideBar Template', () => {
+		let template: Wrapper<AppSidebar>
+		beforeAll(() => {
+			template = mount(AppSidebar, {
+				computed: {
+					topLevelNav: () => [],
+				},
+				mocks: {
+					$store: {
+						state: {
+
+						},
+					},
+				},
+			})
+		})
+
+		it('should always show new folder button', () => {
+			expect(template.find('#new-feed-button').exists()).toBeTruthy()
+		})
+
+		it('should always show unread items nav', () => {
+			expect(template.find('#unread-items').exists()).toBeTruthy()
+		})
+
+		it('should always show all items nav', () => {
+			expect(template.find('#unread-items').exists()).toBeTruthy()
+		})
+
+		it('should always show starred items nav', () => {
+			expect(template.find('#starred-items').exists()).toBeTruthy()
+		})
+
+		it('should always include explore nav item', () => {
+			expect(template.find('#explore-page-nav').exists()).toBeTruthy()
+		})
+
+		it('should show nav item for each topLevelNav', () => {
+			expect(template.findAll('.top-level-nav-item').length).toEqual(0)
+			let templateWithNav = mount(AppSidebar, {
+				computed: {
+					topLevelNav: () => [{ feeds: [], name: '' }],
+				},
+				mocks: {
+					$store: {
+						state: {
+
+						},
+					},
+				},
+			})
+			expect(templateWithNav.findAll('.top-level-nav-item').length).toEqual(1)
+
+			templateWithNav = mount(AppSidebar, {
+				computed: {
+					topLevelNav: () => [{ feeds: [], name: 'folder1' }, { feeds: [], name: 'folder2' }],
+				},
+				mocks: {
+					$store: {
+						state: {
+
+						},
+					},
+				},
+			})
+			expect(templateWithNav.findAll('.top-level-nav-item').length).toEqual(2)
+		})
+
+		it('should add folder when new folder input and submitted', () => {
+			// TODO
+		})
+
+		it('should delete folder if delete button selected', () => {
+			// TODO
+		})
+	})
 
 	afterEach(() => {
 		jest.clearAllMocks()

@@ -1,4 +1,4 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue, Wrapper, mount } from '@vue/test-utils'
 
 import AddFeed from '../../../../src/components/AddFeed.vue'
 
@@ -19,5 +19,18 @@ describe('AddFeed.vue', () => {
 		})
 
 		expect(wrapper.vm.$data.createNewFolder).toBeFalsy()
+	})
+
+	describe('AddFeed Template', () => {
+		let template: Wrapper<AddFeed>
+
+		beforeAll(() => {
+			template = mount(AddFeed, {
+			})
+		})
+
+		it('should always show cron switch', () => {
+			// TODO expect(template.find('#cron-switch').exists()).toBeTruthy()
+		})
 	})
 })

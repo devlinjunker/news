@@ -1,5 +1,5 @@
 import axios from '@nextcloud/axios'
-import { shallowMount, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue, Wrapper, mount } from '@vue/test-utils'
 
 import * as router from '@nextcloud/router'
 
@@ -28,5 +28,18 @@ describe('Explore.vue', () => {
 		})
 
 		expect(wrapper.vm.$data.showAddFeed).toBeFalsy()
+	})
+
+	describe('Explore Template', () => {
+		let template: Wrapper<Explore>
+
+		beforeAll(() => {
+			template = mount(Explore, {
+			})
+		})
+
+		it('should always show cron switch', () => {
+			// TODO expect(template.find('#cron-switch').exists()).toBeTruthy()
+		})
 	})
 })

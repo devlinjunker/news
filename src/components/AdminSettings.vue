@@ -7,7 +7,8 @@ SPDX-Licence-Identifier: AGPL-3.0-or-later
 	<NcSettingsSection :title="t('news', 'News')"
 		class="news-settings"
 		doc-url="https://nextcloud.github.io/news/admin/">
-		<NcCheckboxRadioSwitch type="switch"
+		<NcCheckboxRadioSwitch id="cron-switch"
+			type="switch"
 			:checked.sync="useCronUpdates"
 			@update:checked="update('useCronUpdates', useCronUpdates)">
 			{{ t("news", "Use system cron for updates") }}

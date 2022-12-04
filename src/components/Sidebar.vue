@@ -10,7 +10,7 @@
 				icon="icon-add-folder"
 				@new-item="newFolder" />
 
-			<NcAppNavigationItem :title="t('news', 'Unread articles')" icon="icon-rss">
+			<NcAppNavigationItem id="unread-items" :title="t('news', 'Unread articles')" icon="icon-rss">
 				<template #actions>
 					<NcActionButton icon="icon-checkmark" @click="alert('TODO: Mark Read')">
 						t('news','Mark read')
@@ -20,14 +20,14 @@
 					<NcCounterBubble>5</NcCounterBubble>
 				</template>
 			</NcAppNavigationItem>
-			<NcAppNavigationItem :title="t('news', 'All articles')" icon="icon-rss">
+			<NcAppNavigationItem id="all-items" :title="t('news', 'All articles')" icon="icon-rss">
 				<template #actions>
 					<ActionButton icon="icon-checkmark" @click="alert('TODO: Edit')">
 						t('news','Mark read')
 					</ActionButton>
 				</template>
 			</NcAppNavigationItem>
-			<NcAppNavigationItem :title="t('news', 'Starred')" icon="icon-starred">
+			<NcAppNavigationItem id="starred-items" :title="t('news', 'Starred')" icon="icon-starred">
 				<template #counter>
 					<NcCounterBubble>35</NcCounterBubble>
 				</template>
@@ -35,6 +35,7 @@
 
 			<NcAppNavigationItem v-for="topLevelItem in topLevelNav"
 				:key="topLevelItem.name"
+				class="top-level-nav-item"
 				:title="topLevelItem.name"
 				icon="icon-folder"
 				:allow-collapse="true">
@@ -116,7 +117,8 @@
 				</template>
 			</NcAppNavigationItem>
 
-			<NcAppNavigationItem :title="t('news', 'Explore')"
+			<NcAppNavigationItem id="explore-page-nav"
+				:title="t('news', 'Explore')"
 				icon="icon-link"
 				:to="{ name: 'explore' }">
 				<template #counter>
