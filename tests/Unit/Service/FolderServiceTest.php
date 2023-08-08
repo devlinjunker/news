@@ -65,12 +65,20 @@ class FolderServiceTest extends TestCase
     protected function setUp(): void
     {
         $this->time = 222;
-        $timeFactory = $this->getMockBuilder(TimeFactory::class)
+
+        $timeFactoryBuilder = $this->getMockBuilder(TimeFactory::class)
+            ->disableOriginalConstructor();
+
+        $mockDateTime = $this->getMockBuilder(\DateTimeImmutable::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $timeFactory->expects($this->any())
-            ->method('getTime')
+        $mockDateTime->expects($this->any())
+            ->method('getTimestamp')
             ->will($this->returnValue($this->time));
+
+        $timeFactory->expects($this->any())
+            ->method('now')
+            ->will($this->returnValue($mockDateTime));
 
         $this->feedService = $this->getMockBuilder(FeedServiceV2::class)
             ->disableOriginalConstructor()

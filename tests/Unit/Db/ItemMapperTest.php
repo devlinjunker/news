@@ -419,7 +419,7 @@ class ItemMapperTest extends MapperTestUtility
 
         $this->builder->expects($this->once())
             ->method('select')
-            ->with('items.*')
+            ->with('items.id')
             ->will($this->returnSelf());
 
         $this->builder->expects($this->once())
@@ -497,14 +497,14 @@ class ItemMapperTest extends MapperTestUtility
             ->with('items', 'news_feeds', 'feeds', 'items.feed_id = feeds.id')
             ->will($this->returnSelf());
 
-        $selectbuilder->expects($this->exactly(2))
+        $selectbuilder->expects($this->exactly(3))
             ->method('andWhere')
-            ->withConsecutive(['feeds.user_id = :userId'], ['items.id <= :maxItemId'])
+            ->withConsecutive(['feeds.user_id = :userId'], ['items.id <= :maxItemId'], ['items.unread = :unread'])
             ->will($this->returnSelf());
 
-        $selectbuilder->expects($this->exactly(2))
+        $selectbuilder->expects($this->exactly(3))
             ->method('setParameter')
-            ->withConsecutive(['userId', 'admin'], ['maxItemId', 4])
+            ->withConsecutive(['userId', 'admin'], ['maxItemId', 4], ['unread', true])
             ->will($this->returnSelf());
 
         $selectbuilder->expects($this->exactly(1))
@@ -528,7 +528,7 @@ class ItemMapperTest extends MapperTestUtility
             ->with('SQL QUERY')
             ->willReturn($result);
 
-        $this->builder->expects($this->once())
+        $this->builder->expects($this->exactly(2))
             ->method('createParameter')
             ->will($this->returnArgument(0));
 
@@ -537,19 +537,19 @@ class ItemMapperTest extends MapperTestUtility
             ->with('news_items')
             ->will($this->returnSelf());
 
-        $this->builder->expects($this->once())
+        $this->builder->expects($this->exactly(2))
             ->method('set')
-            ->with('unread', 'unread')
+            ->withConsecutive(['unread', 'unread'], ['last_modified', 'last_modified'])
             ->will($this->returnSelf());
 
-        $this->builder->expects($this->exactly(2))
+        $this->builder->expects($this->exactly(1))
             ->method('andWhere')
-            ->withConsecutive(['id IN (:idList)'], ['unread != :unread'])
+            ->withConsecutive(['id IN (:idList)'])
             ->will($this->returnSelf());
 
-        $this->builder->expects($this->exactly(2))
+        $this->builder->expects($this->exactly(3))
             ->method('setParameter')
-            ->withConsecutive(['unread', false], ['idList', [1, 2]])
+            ->withConsecutive(['idList', [1, 2]], ['unread', false], ['last_modified'])
             ->will($this->returnSelf());
 
         $this->builder->expects($this->exactly(1))
