@@ -66,21 +66,9 @@ class FolderServiceTest extends TestCase
     {
         $this->time = 222;
 
-        $timeFactoryBuilder = $this->getMockBuilder(TimeFactory::class)
-            ->disableOriginalConstructor();
-
-        // HACK: due to differences in NC26 and NC 27
-        if (!method_exists(TimeFactory::class, 'now')) {
-            $timeFactoryBuilder->addMethods(['now'])
-                ->onlyMethods(['getTime']);       
-        } else if(!method_exists(TimeFactory::class, 'getTime')) {
-            $timeFactoryBuilder->addMethods(['getTime']);
-        }
-
-        $timeFactory = $timeFactoryBuilder->getMock();
-        $timeFactory->expects($this->any())
-            ->method('getTime')
-            ->will($this->returnValue($this->time));
+        $timeFactory = $this->getMockBuilder(TimeFactory::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $mockDateTime = $this->getMockBuilder(\DateTimeImmutable::class)
             ->disableOriginalConstructor()
