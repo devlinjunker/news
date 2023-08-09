@@ -53,7 +53,8 @@
 				:title="topLevelItem.name || topLevelItem.title"
 				:icon="true"
 				:to="isFolder(topLevelItem) ? { name: ROUTES.FOLDER, params: { folderId: topLevelItem.id.toString() }} : { name: ROUTES.FEED, params: { feedId: topLevelItem.id.toString() } }"
-				:allow-collapse="true">
+				:allow-collapse="true"
+				:force-menu="true">
 				<template #default>
 					<NcAppNavigationItem v-for="feed in topLevelItem.feeds"
 						:key="feed.name"
@@ -66,54 +67,7 @@
 						</template>
 
 						<template #actions>
-							<NcActionButton icon="icon-checkmark"
-								@click="alert('TODO: Mark read')">
-								{{ t("news", "Mark read") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-pinned"
-								@click="alert('TODO: Unpin from top')">
-								{{ t("news", "Unpin from top") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-caret-dark"
-								@click="alert('TODO: Newest First')">
-								{{ t("news", "Newest first") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-caret-dark"
-								@click="alert('TODO: Oldest first')">
-								{{ t("news", "Oldest first") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-caret-dark"
-								@click="alert('TODO: Default Order')">
-								{{ t("news", "Default order") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-full-text-disabled"
-								@click="alert('TODO: Enable Full Text')">
-								{{ t("news", "Enable full text") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-full-text-enabled"
-								@click="alert('TODO: DIsable Full Text')">
-								{{ t("news", "Disable full text") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-updatemode-default"
-								@click="alert('TODO: Unread Updated')">
-								{{ t("news", "Unread updated") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-updatemode-unread"
-								@click="alert('TOODO: Ignore UPdated')">
-								{{ t("news", "Ignore updated") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-icon-rss"
-								@click="alert('TODO: Open Feed URL')">
-								{{ t("news", "Open feed URL") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-icon-rename"
-								@click="alert('TODO: Rename')">
-								{{ t("news", "Rename") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-delete"
-								@click="alert('TODO: Delete Feed')">
-								{{ t("news", "Delete") }}
-							</NcActionButton>
+							<SidebarFeedLinkActions :feed="feed" />
 						</template>
 					</NcAppNavigationItem>
 				</template>
@@ -131,13 +85,15 @@
 					</NcCounterBubble>
 				</template>
 				<template #actions>
-					<NcActionButton icon="icon-checkmark" @click="alert('TODO: Mark read')">
+					<SidebarFeedLinkActions v-if="topLevelItem.name === undefined" :feed="feed" />
+
+					<NcActionButton v-if="topLevelItem.name !== undefined" icon="icon-checkmark" @click="alert('TODO: Mark read')">
 						{{ t("news", "Mark read") }}
 					</NcActionButton>
-					<NcActionButton icon="icon-rename" @click="alert('TODO: Rename')">
+					<NcActionButton v-if="topLevelItem.name !== undefined" icon="icon-rename" @click="alert('TODO: Rename')">
 						{{ t("news", "Rename") }}
 					</NcActionButton>
-					<NcActionButton icon="icon-delete" @click="deleteFolder(topLevelItem)">
+					<NcActionButton v-if="topLevelItem.name !== undefined" icon="icon-delete" @click="deleteFolder(topLevelItem)">
 						{{ t("news", "Delete") }}
 					</NcActionButton>
 				</template>
@@ -180,12 +136,13 @@ import PlusIcon from 'vue-material-design-icons/Plus.vue'
 import { ROUTES } from '../routes'
 import { ACTIONS, AppState } from '../store'
 
+import SidebarFeedLinkActions from './SidebarFeedLinkActions.vue'
 import AddFeed from './AddFeed.vue'
 
 import { Folder } from '../types/Folder'
 import { Feed } from '../types/Feed'
 
-const SideBarState = {
+const SidebarState = {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	topLevelNav(localState: any, state: AppState): (Feed | Folder)[] {
 		let navItems: (Feed | Folder)[] = state.feeds.filter((feed: Feed) => {
@@ -212,16 +169,18 @@ export default Vue.extend({
 		EarthIcon,
 		FolderPlusIcon,
 		PlusIcon,
+		SidebarFeedLinkActions,
 	},
 	data: () => {
 		return {
 			showAddFeed: false,
 			ROUTES,
+			feed: {},
 		}
 	},
 	computed: {
 		...mapState(['feeds', 'folders', 'items']),
-		...mapState(SideBarState),
+		...mapState(SidebarState),
 	},
 	methods: {
 		newFolder(value: string) {
