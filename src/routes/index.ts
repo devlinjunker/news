@@ -6,6 +6,8 @@ import StarredPanel from '../components/Starred.vue'
 export const ROUTES = {
 	EXPLORE: 'explore',
 	STARRED: 'starred',
+	FEED_VIEW: 'feed',
+	FOLDER_VIEW: 'folder',
 }
 
 const getInitialRoute = function() {
@@ -31,6 +33,12 @@ const routes = [
 		name: ROUTES.STARRED,
 		path: '/starred',
 		component: StarredPanel,
+		props: true,
+	},
+	{
+		name: ROUTES.FEED_VIEW,
+		path: '/feed',
+		// component: FeedViewPanel,
 		props: true,
 	},
 ]

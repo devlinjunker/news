@@ -36,12 +36,15 @@
 			<NcAppNavigationItem v-for="topLevelItem in topLevelNav"
 				:key="topLevelItem.name || topLevelItem.title"
 				:title="topLevelItem.name || topLevelItem.title"
-				:icon="topLevelItem.name !== undefined ? 'icon-folder': ''"
-				:allow-collapse="true">
+				:icon="topLevelItem.name !== undefined ? 'icon-folder': 'icon-rss'"
+				:allow-collapse="true"
+				:force-menu="true"
+				@click="onClickTopLevelNav(topLevelItem)">
 				<template #default>
 					<NcAppNavigationItem v-for="feed in topLevelItem.feeds"
 						:key="feed.name"
-						:title="feed.title">
+						:title="feed.title"
+						:to="{ name: ROUTES.FEED_VIEW }">
 						<template #icon>
 							<img v-if="feed.faviconLink"
 								:src="feed.faviconLink"
@@ -49,54 +52,7 @@
 							<div v-if="!feed.faviconLink" class="icon-rss" />
 						</template>
 						<template #actions>
-							<NcActionButton icon="icon-checkmark"
-								@click="alert('TODO: Mark read')">
-								{{ t("news", "Mark read") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-pinned"
-								@click="alert('TODO: Unpin from top')">
-								{{ t("news", "Unpin from top") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-caret-dark"
-								@click="alert('TODO: Newest First')">
-								{{ t("news", "Newest first") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-caret-dark"
-								@click="alert('TODO: Oldest first')">
-								{{ t("news", "Oldest first") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-caret-dark"
-								@click="alert('TODO: Default Order')">
-								{{ t("news", "Default order") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-full-text-disabled"
-								@click="alert('TODO: Enable Full Text')">
-								{{ t("news", "Enable full text") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-full-text-enabled"
-								@click="alert('TODO: DIsable Full Text')">
-								{{ t("news", "Disable full text") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-updatemode-default"
-								@click="alert('TODO: Unread Updated')">
-								{{ t("news", "Unread updated") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-updatemode-unread"
-								@click="alert('TOODO: Ignore UPdated')">
-								{{ t("news", "Ignore updated") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-icon-rss"
-								@click="alert('TODO: Open Feed URL')">
-								{{ t("news", "Open feed URL") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-icon-rename"
-								@click="alert('TODO: Rename')">
-								{{ t("news", "Rename") }}
-							</NcActionButton>
-							<NcActionButton icon="icon-delete"
-								@click="alert('TODO: Delete Feed')">
-								{{ t("news", "Delete") }}
-							</NcActionButton>
+							<SidebarFeedLinkActions :feed="feed" />
 						</template>
 					</NcAppNavigationItem>
 				</template>
@@ -104,13 +60,15 @@
 					<NcCounterBubble>{{ topLevelItem.feedCount }}</NcCounterBubble>
 				</template>
 				<template #actions>
-					<NcActionButton icon="icon-checkmark" @click="alert('TODO: Mark read')">
+					<SidebarFeedLinkActions v-if="topLevelItem.name === undefined" :feed="feed" />
+
+					<NcActionButton v-if="topLevelItem.name !== undefined" icon="icon-checkmark" @click="alert('TODO: Mark read')">
 						{{ t("news", "Mark read") }}
 					</NcActionButton>
-					<NcActionButton icon="icon-rename" @click="alert('TODO: Rename')">
+					<NcActionButton v-if="topLevelItem.name !== undefined" icon="icon-rename" @click="alert('TODO: Rename')">
 						{{ t("news", "Rename") }}
 					</NcActionButton>
-					<NcActionButton icon="icon-delete" @click="deleteFolder(topLevelItem)">
+					<NcActionButton v-if="topLevelItem.name !== undefined" icon="icon-delete" @click="deleteFolder(topLevelItem)">
 						{{ t("news", "Delete") }}
 					</NcActionButton>
 				</template>
@@ -143,12 +101,13 @@ import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
 import { ROUTES } from '../routes'
 import { ACTIONS, AppState } from '../store'
 
+import SidebarFeedLinkActions from './SidebarFeedLinkActions.vue'
 import AddFeed from './AddFeed.vue'
 
 import { Folder } from '../types/Folder'
 import { Feed } from '../types/Feed'
 
-const SideBarState = {
+const SidebarState = {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	topLevelNav(localState: any, state: AppState): (Feed | Folder)[] {
 		let navItems: (Feed | Folder)[] = state.feeds.filter((feed: Feed) => {
@@ -170,16 +129,18 @@ export default Vue.extend({
 		NcCounterBubble,
 		NcActionButton,
 		AddFeed,
+		SidebarFeedLinkActions,
 	},
 	data: () => {
 		return {
 			showAddFeed: false,
 			ROUTES,
+			feed: {},
 		}
 	},
 	computed: {
 		...mapState(['feeds', 'folders']),
-		...mapState(SideBarState),
+		...mapState(SidebarState),
 	},
 	created() {
 		// TODO: init?
@@ -198,6 +159,15 @@ export default Vue.extend({
 		},
 		closeShowAddFeed() {
 			this.showAddFeed = false
+		},
+		onClickTopLevelNav(topLevelItem: Folder | Feed) {
+			if ((topLevelItem as Folder).name !== undefined) {
+				topLevelItem = topLevelItem as Folder
+				this.$router.push({ name: ROUTES.FOLDER_VIEW })
+			} else {
+				topLevelItem = topLevelItem as Feed
+				this.$router.push({ name: ROUTES.FEED_VIEW })
+			}
 		},
 		alert(msg: string) {
 			window.alert(msg)
