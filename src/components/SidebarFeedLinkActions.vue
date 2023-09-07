@@ -1,42 +1,55 @@
 <template>
 	<span>
 		<NcActionButton icon="icon-checkmark"
-			@click="alert('TODO: Mark read')">
+			@click="markRead">
 			{{ t("news", "Mark read") }}
 		</NcActionButton>
-		<NcActionButton icon="icon-pinned"
+		<NcActionButton v-if="feed.pinned"
+			icon="icon-pinned"
 			@click="alert('TODO: Unpin from top')">
 			{{ t("news", "Unpin from top") }}
 		</NcActionButton>
-		<NcActionButton icon="icon-caret-dark"
+		<NcActionButton v-if="!feed.pinned"
+			icon="icon-pinned"
+			@click="alert('TODO: Pin to top')">
+			{{ t("news", "Pin to top") }}
+		</NcActionButton>
+		<NcActionButton v-if="feed.ordering === FEED_ORDER.NEWEST"
+			icon="icon-caret-dark"
 			@click="alert('TODO: Newest First')">
 			{{ t("news", "Newest first") }}
 		</NcActionButton>
-		<NcActionButton icon="icon-caret-dark"
+		<NcActionButton v-if="feed.ordering === FEED_ORDER.OLDEST"
+			icon="icon-caret-dark"
 			@click="alert('TODO: Oldest first')">
 			{{ t("news", "Oldest first") }}
 		</NcActionButton>
-		<NcActionButton icon="icon-caret-dark"
+		<NcActionButton v-if="feed.ordering === FEED_ORDER.DEFAULT"
+			icon="icon-caret-dark"
 			@click="alert('TODO: Default Order')">
 			{{ t("news", "Default order") }}
 		</NcActionButton>
-		<NcActionButton icon="icon-full-text-disabled"
+		<NcActionButton v-if="!feed.enableFullText"
+			icon="icon-full-text-disabled"
 			@click="alert('TODO: Enable Full Text')">
 			{{ t("news", "Enable full text") }}
 		</NcActionButton>
-		<NcActionButton icon="icon-full-text-enabled"
+		<NcActionButton v-if="feed.enableFullText"
+			icon="icon-full-text-enabled"
 			@click="alert('TODO: DIsable Full Text')">
 			{{ t("news", "Disable full text") }}
 		</NcActionButton>
-		<NcActionButton icon="icon-updatemode-default"
+		<NcActionButton v-if="feed.updateMode === FEED_UPDATE_MODE.UNRAD"
+			icon="icon-updatemode-default"
 			@click="alert('TODO: Unread Updated')">
 			{{ t("news", "Unread updated") }}
 		</NcActionButton>
-		<NcActionButton icon="icon-updatemode-unread"
+		<NcActionButton v-if="feed.updateMode === FEED_UPDATE_MODE.IGNORE"
+			icon="icon-updatemode-unread"
 			@click="alert('TOODO: Ignore UPdated')">
 			{{ t("news", "Ignore updated") }}
 		</NcActionButton>
-		<NcActionButton icon="icon-icon-rss"
+		<NcActionButton icon="icon-rss"
 			@click="alert('TODO: Open Feed URL')">
 			{{ t("news", "Open feed URL") }}
 		</NcActionButton>
@@ -58,7 +71,9 @@ import Vue from 'vue'
 
 import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
 
-// import { ACTIONS, AppState } from '../store'
+import { FEED_ORDER, FEED_UPDATE_MODE } from '../dataservices/feed.service'
+
+import { ACTIONS } from '../store'
 
 // import { Feed } from '../types/Feed'
 
@@ -70,11 +85,15 @@ export default Vue.extend({
 		NcActionButton,
 	},
 	props: {
-		feed: {},
+		feed: {
+			type: Object,
+			required: true,
+		},
 	},
 	data: () => {
 		return {
-			// TODO?
+			FEED_ORDER,
+			FEED_UPDATE_MODE,
 		}
 	},
 
@@ -87,6 +106,9 @@ export default Vue.extend({
 	methods: {
 		alert(msg: string) {
 			window.alert(msg)
+		},
+		markRead() {
+			this.$store.dispatch(ACTIONS.FEED_MARK_READ, { feed: this.feed })
 		},
 	},
 })
