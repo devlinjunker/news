@@ -67,7 +67,7 @@
 						</template>
 
 						<template #actions>
-							<SidebarFeedLinkActions :feed="feed" />
+							<SidebarFeedLinkActions :feed-id="feed.id" />
 						</template>
 					</NcAppNavigationItem>
 				</template>
@@ -85,7 +85,7 @@
 					</NcCounterBubble>
 				</template>
 				<template #actions>
-					<SidebarFeedLinkActions v-if="topLevelItem.name === undefined" :feed="topLevelItem" />
+					<SidebarFeedLinkActions v-if="topLevelItem.name === undefined" :feed-id="topLevelItem.id" />
 
 					<NcActionButton v-if="topLevelItem.name !== undefined" icon="icon-checkmark" @click="alert('TODO: Mark read')">
 						{{ t("news", "Mark read") }}
@@ -150,7 +150,14 @@ const SidebarState = {
 		})
 		navItems = navItems.concat(state.folders)
 
-		return navItems
+		return navItems.sort((item, item2) => {
+			if ((item as Feed).pinned && !(item2 as Feed).pinned) {
+				return -1
+			} else if ((item2 as Feed).pinned && !(item as Feed).pinned) {
+				return 1
+			}
+			return 0
+		})
 	},
 }
 
