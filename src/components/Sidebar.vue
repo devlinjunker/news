@@ -150,6 +150,7 @@ const SidebarState = {
 		})
 		navItems = navItems.concat(state.folders)
 
+		// bring pinned items to the top
 		return navItems.sort((item, item2) => {
 			if ((item as Feed).pinned && !(item2 as Feed).pinned) {
 				return -1
@@ -182,7 +183,6 @@ export default Vue.extend({
 		return {
 			showAddFeed: false,
 			ROUTES,
-			feed: {},
 		}
 	},
 	computed: {
@@ -219,7 +219,7 @@ export default Vue.extend({
 		renameFolder(folder: Folder) {
 			const name = window.prompt(t('news', 'Rename Folder'), folder.name)
 
-			// null on escape
+			// null when user presses escape (do nothing)
 			if (name !== null) {
 				this.$store.dispatch(ACTIONS.FOLDER_SET_NAME, { folder, name })
 			}
