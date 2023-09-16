@@ -233,9 +233,6 @@ export default Vue.extend({
 		closeShowAddFeed() {
 			this.showAddFeed = false
 		},
-		alert(msg: string) {
-			window.alert(msg)
-		},
 		isFolder(item: Feed | Folder) {
 			return (item as Folder).name !== undefined
 		},
