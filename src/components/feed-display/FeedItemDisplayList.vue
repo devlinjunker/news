@@ -61,6 +61,7 @@ import FeedItemRow from './FeedItemRow.vue'
 import FeedItemDisplay from './FeedItemDisplay.vue'
 
 import { FeedItem } from '../../types/FeedItem'
+import { MUTATIONS } from '../../store'
 
 const DEFAULT_DISPLAY_LIST_CONFIG = {
 	starFilter: true,
@@ -173,7 +174,11 @@ export default Vue.extend({
 				response = response.filter(this.filter)
 			}
 
-			return response.sort(this.sort)
+			const items = response.sort(this.sort)
+
+			this.$store.commit(MUTATIONS.SET_VISIBLE_ITEMS, items)
+
+			return items
 		},
 	},
 })
