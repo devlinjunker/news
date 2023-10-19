@@ -16,6 +16,9 @@ export const FEED_ITEM_ACTION_TYPES = {
 	FETCH_FEED_ITEMS: 'FETCH_FEED_ITEMS',
 	FETCH_FOLDER_FEED_ITEMS: 'FETCH_FOLDER_FEED_ITEMS',
 	FETCH_ITEMS: 'FETCH_ITEMS',
+
+	GO_NEXT_VISIBLE_ITEM: 'GO_NEXT_VISIBLE_ITEM',
+	GO_PREVIOUS_VISIBLE_ITEM: 'GO_PREVIOUS_VISIBLE_ITEM',
 }
 
 export type ItemState = {
@@ -30,6 +33,8 @@ export type ItemState = {
 
 	selectedId?: string;
 	playingItem?: FeedItem
+
+	visibleItems: FeedItem[];
 }
 
 const state: ItemState = {
@@ -44,6 +49,8 @@ const state: ItemState = {
 
 	selectedId: undefined,
 	playingItem: undefined,
+
+	visibleItems: [],
 }
 
 const getters = {
@@ -287,6 +294,18 @@ export const actions = {
 		commit(FEED_ITEM_MUTATION_TYPES.UPDATE_ITEM, { item })
 		commit(FEED_ITEM_MUTATION_TYPES.SET_STARRED_COUNT, state.starredCount - 1)
 	},
+
+	[FEED_ITEM_ACTION_TYPES.GO_NEXT_VISIBLE_ITEM]({ commit, state }: ActionParams<ItemState>) {
+		const selectedIdx = state.visibleItems.findIndex((item) => { return item.id === state.selectedId })
+		commit(FEED_ITEM_MUTATION_TYPES.SET_SELECTED_ITEM, { id: state.visibleItems[selectedIdx + 1].id })
+		commit(FEED_ITEM_ACTION_TYPES.MARK_READ, { item: state.visibleItems[selectedIdx - 1] })
+	},
+
+	[FEED_ITEM_ACTION_TYPES.GO_PREVIOUS_VISIBLE_ITEM]({ commit, state }: ActionParams<ItemState>) {
+		const selectedIdx = state.visibleItems.findIndex((item) => { return item.id === state.selectedId })
+		commit(FEED_ITEM_MUTATION_TYPES.SET_SELECTED_ITEM, { id: state.visibleItems[selectedIdx - 1].id })
+		commit(FEED_ITEM_ACTION_TYPES.MARK_READ, { item: state.visibleItems[selectedIdx - 1] })
+	},
 }
 
 export const mutations = {
@@ -369,6 +388,13 @@ export const mutations = {
 				item.unread = false
 			}
 		})
+	},
+
+	[FEED_ITEM_MUTATION_TYPES.SET_VISIBLE_ITEMS](
+		state: ItemState,
+		items: FeedItem[],
+	) {
+		state.visibleItems = items
 	},
 }
 
